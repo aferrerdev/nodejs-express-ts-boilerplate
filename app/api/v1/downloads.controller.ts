@@ -5,7 +5,7 @@ import BaseController from '../base.controller';
 class DownloadsController extends BaseController {
 
     constructor() {
-        super('/downloads');
+        super('/v1/downloads');
     }
 
     protected initializeRoutes() {
