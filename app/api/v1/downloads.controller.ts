@@ -12,7 +12,7 @@ class DownloadsController extends BaseController {
         this.router.get(this.path+'/ios', this.getAppleApp);
         this.router.get(this.path+'/android', this.getAndroidApp);
     }
-
+    
     getAppleApp(req: Request, res: Response, next: NextFunction) {
         res.send('iOS');
     }
