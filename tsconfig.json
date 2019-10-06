@@ -15,6 +15,6 @@
         }
     },
     "include": [
-        "app/**/*", "app/index.ts"
+        "src/**/*", "src/index.ts"
     ]
 }
