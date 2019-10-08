@@ -1,5 +1,5 @@
 import express from "express";
-import BaseController from "./api/base.controller";
+import BaseController from "./controllers/base.controller";
 import * as bodyParser from "body-parser";
 import MongoDbConnection from "./config/mongodb";
 

@@ -1,8 +1,8 @@
 import App from "./application";
 
 // API Controllers
-import DownloadsController from "./api/v1/downloads.controller";
-import UsersController from "./api/v1/users.controller";
+import DownloadsController from "./controllers/v1/downloads.controller";
+import UsersController from "./controllers/v1/users.controller";
 
 const application = new App(
     // API Controllers

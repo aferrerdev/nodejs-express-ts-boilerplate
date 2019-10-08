@@ -4,8 +4,9 @@ import BaseController from "../base.controller";
 
 class DownloadsController extends BaseController {
 
-    constructor() {
-        super("/v1/downloads");
+    protected initializeRoutes() {
+        this.router.get("/v1/downloads/ios", this.getAppleApp);
+        this.router.get("/v1/downloads/android", this.getAndroidApp);
     }
 
     public getAppleApp(req: Request, res: Response, next: NextFunction) {
@@ -16,10 +17,6 @@ class DownloadsController extends BaseController {
         res.send("Android");
     }
 
-    protected initializeRoutes() {
-        this.router.get(this.path + "/ios", this.getAppleApp);
-        this.router.get(this.path + "/android", this.getAndroidApp);
-    }
 }
 
 export default DownloadsController;

@@ -5,8 +5,8 @@ import User from "../../domain/models/user.model";
 
 class UsersController extends BaseController {
 
-    constructor() {
-        super("/v1/users");
+    protected initializeRoutes() {
+        this.router.get("/v1/users/register", this.register);
     }
 
     public register(req: Request, res: Response, next: NextFunction) {
@@ -19,10 +19,6 @@ class UsersController extends BaseController {
 
         new UserRepository().create(user);
         res.send(user);
-    }
-
-    protected initializeRoutes() {
-        this.router.get(this.path + "/register", this.register);
     }
 }
 

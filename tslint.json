@@ -8,7 +8,7 @@
         "no-console": false,
         "ordered-imports": false,
         "ignore-blank-lines": true,
-        "no-trailing-whitespace": false
-
+        "no-trailing-whitespace": false,
+        "member-ordering": false
     }
 }
