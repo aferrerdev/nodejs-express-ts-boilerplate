@@ -1,6 +1,7 @@
-import { NextFunction, Request, Response, RequestHandler, response } from "express";
+import { NextFunction, Request, Response, RequestHandler } from "express";
 import * as jwt from "jsonwebtoken";
 import { sessionTokenSecret } from "../config/jwt_session.config";
+import { ErrorResponse } from "./messages";
 
 const excluded = [
     "/v1/users/register",
@@ -20,13 +21,15 @@ export const JwtVerifyMiddleware: RequestHandler = (req: Request, res: Response,
         jwt.verify(token, sessionTokenSecret, (err, decoded: any) => {
             if (err) {
                 console.log(err);
+                next(ErrorResponse.Unauthorized());
             } else {
                 console.log(decoded);
                 // Searc user in database.
                 // req.user = userDataFromDatabase
+                // Request can continue to next controller
                 next();
             }
         });
     }
-    res.status(401).json({ error: "Unathorized" });
+    next(ErrorResponse.Unauthorized());
 };

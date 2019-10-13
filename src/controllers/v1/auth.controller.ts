@@ -2,9 +2,9 @@
 import { NextFunction, Request, Response } from "express";
 import BaseController from "../base.controller";
 import * as jwt from "jsonwebtoken";
-import { sessionTokenSecret, sessionTokenLifeTime } from "src/config/jwt_session.config";
+import { sessionTokenSecret, sessionTokenLifeTime } from "../../config/jwt_session.config";
 
-class DownloadsController extends BaseController {
+export default class AuthController extends BaseController {
 
     protected initializeRoutes() {
         this.router.get("/v1/auth/login", this.login);
@@ -19,7 +19,4 @@ class DownloadsController extends BaseController {
     public logout(req: Request, res: Response, next: NextFunction) {
         res.status(200).json({ auth: true });
     }
-
 }
-
-export default DownloadsController;

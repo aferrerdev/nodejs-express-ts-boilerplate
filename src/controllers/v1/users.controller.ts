@@ -3,7 +3,7 @@ import BaseController from "../base.controller";
 import UserRepository from "../../domain/repositories/user.repository";
 import User from "../../domain/models/user.model";
 
-class UsersController extends BaseController {
+export default class UsersController extends BaseController {
 
     protected initializeRoutes() {
         this.router.get("/v1/users/register", this.register);
@@ -21,5 +21,3 @@ class UsersController extends BaseController {
         res.send(user);
     }
 }
-
-export default UsersController;

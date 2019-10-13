@@ -2,7 +2,7 @@
 import { NextFunction, Request, Response } from "express";
 import BaseController from "../base.controller";
 
-class DownloadsController extends BaseController {
+export default class DownloadsController extends BaseController {
 
     protected initializeRoutes() {
         this.router.get("/v1/downloads/ios", this.getAppleApp);
@@ -18,5 +18,3 @@ class DownloadsController extends BaseController {
     }
 
 }
-
-export default DownloadsController;
