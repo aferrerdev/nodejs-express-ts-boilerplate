@@ -19,9 +19,11 @@
   "homepage": "https://github.com/aferrerdev/nodejs-express-ts-boilerplate#readme",
   "dependencies": {
     "@types/express": "^4.17.1",
+    "@types/jsonwebtoken": "^8.3.4",
     "@types/mongoose": "^5.5.18",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.3",
     "request": "^2.88.0",
     "typegoose": "^5.9.1"

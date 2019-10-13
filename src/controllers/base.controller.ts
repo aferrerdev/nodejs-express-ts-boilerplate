@@ -8,6 +8,10 @@ abstract class BaseController {
         this.initializeRoutes();
     }
 
+    /**
+     * All routes of the controller should be initialized
+     * to the router
+     */
     protected abstract initializeRoutes(): any;
 }
 
