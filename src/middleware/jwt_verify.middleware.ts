@@ -14,22 +14,25 @@ export const JwtVerifyMiddleware: RequestHandler = (req: Request, res: Response,
     if (excluded.includes(req.path)) {
         console.log("Logger middleware");
         next();
+    } else {
+        // Otherwise check Authorization headers
+        if (req.headers.authorization) {
+            const token = req.headers.authorization.split(" ")[1];
+            jwt.verify(token, sessionTokenSecret, (err, decoded: any) => {
+                if (err) {
+                    console.log(err);
+                    next(ErrorResponse.Unauthorized());
+                } else {
+                    console.log(decoded);
+                    // Searc user in database.
+                    // req.user = userDataFromDatabase
+                    // Request can continue to next controller
+                    next();
+                }
+            });
+        } else {
+            next(ErrorResponse.Unauthorized());
+        }
     }
-    // Otherwise check Authorization headers
-    if (req.headers.authorization) {
-        const token = req.headers.authorization.split(" ")[1];
-        jwt.verify(token, sessionTokenSecret, (err, decoded: any) => {
-            if (err) {
-                console.log(err);
-                next(ErrorResponse.Unauthorized());
-            } else {
-                console.log(decoded);
-                // Searc user in database.
-                // req.user = userDataFromDatabase
-                // Request can continue to next controller
-                next();
-            }
-        });
-    }
-    next(ErrorResponse.Unauthorized());
+    
 };
