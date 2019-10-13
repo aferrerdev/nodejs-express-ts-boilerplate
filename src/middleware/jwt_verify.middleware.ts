@@ -5,6 +5,7 @@ import { ErrorResponse } from "./messages";
 
 const excluded = [
     "/v1/users/register",
+    "/v1/users/view",
     "/v1/downloads/android",
     "/v1/downloads/ios"
 ];

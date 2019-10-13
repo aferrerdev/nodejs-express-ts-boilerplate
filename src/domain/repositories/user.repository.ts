@@ -14,8 +14,24 @@ export default class UserRepository implements IUserRepository {
             name: user.name,
             last_name: user.lastName,
             email: user.email,
-            password: user.password
+            password: user.getPassword(),
+            token: user.token
         });
         return user;
+    }
+
+    public async view(email: string): Promise<User> {
+        const document = await UserModel.findOne({ email });
+        const user = new User();
+        user.name = document.get("name");
+        user.lastName = document.get("last_name");
+        user.email = document.get("email");
+        user.token = document.get("token");
+        return user;
+    }
+
+    public async exists(email: string): Promise<boolean> {
+        const result = await UserModel.findOne({ email: email });
+        return result != null;
     }
 }

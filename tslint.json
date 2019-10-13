@@ -10,6 +10,8 @@
         "ignore-blank-lines": true,
         "no-trailing-whitespace": false,
         "member-ordering": false,
-        "disable-next-line": true
+        "disable-next-line": true,
+        "object-literal-shorthand": false,
+        "max-line-length": false
     }
 }

@@ -8,6 +8,7 @@ class UserSchema extends Schema {
             name: String,
             last_name: String,
             password: String,
+            token: String
         });
     }
 }
