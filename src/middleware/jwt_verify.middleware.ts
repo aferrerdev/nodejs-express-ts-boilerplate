@@ -7,7 +7,8 @@ const excluded = [
     "/v1/users/register",
     "/v1/users/view",
     "/v1/downloads/android",
-    "/v1/downloads/ios"
+    "/v1/downloads/ios",
+    "/v1/auth/login"
 ];
 
 export const JwtVerifyMiddleware: RequestHandler = (req: Request, res: Response, next: NextFunction) => {

@@ -10,12 +10,20 @@
         "baseUrl": ".",
         "paths": {
             "*": [
-                "*",
                 "node_modules/*"
+            ],
+            "@api/*": [
+                "src/api/*"
+            ],
+            "@config/*": [
+                "src/config/*"
+            ],
+            "@domain/*": [
+                "src/domain/*"
             ]
         }
     },
     "include": [
-        "src/**/*", "src/server.ts"
+        "src/**/*"
     ]
 }

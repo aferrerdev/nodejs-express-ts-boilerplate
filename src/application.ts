@@ -1,22 +1,24 @@
 import express from "express";
-import BaseController from "./controllers/base.controller";
 import * as bodyParser from "body-parser";
 import MongoDbConnection from "./config/mongodb.config";
 import { JwtVerifyMiddleware } from "./middleware/jwt_verify.middleware";
 import { ErrorHandlerMiddleware } from "./middleware/errorHandler.middleware";
+import AppRoutes from "./appRoutes";
 
 class Application {
 
   public app: express.Application;
   public port: number;
 
-  constructor(controllers: BaseController[], port: number) {
+  constructor(port: number) {
     this.app = express();
     this.port = port;
 
     this.initDataBaseConnection();
     this.initMiddlewares();
-    this.initControllers(controllers);
+    const appRoutes = new AppRoutes();
+    appRoutes.install();
+    this.app.use(appRoutes.router);
   }
 
   public listen() {
@@ -36,13 +38,6 @@ class Application {
     // Error handling middleware
     this.app.use(ErrorHandlerMiddleware);
     this.app.use(bodyParser.json());
-  }
-
-  private initControllers(controllers: BaseController[]) {
-    controllers.forEach((controller) => {
-      this.app.use("/", controller.router);
-      console.log(`Controller initialized: ${controller.constructor.name}`)
-    });
   }
 }
 
