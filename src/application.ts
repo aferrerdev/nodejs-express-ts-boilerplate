@@ -1,7 +1,7 @@
 import express from "express";
 import * as bodyParser from "body-parser";
 import MongoDbConnection from "./config/mongodb.config";
-import { JwtVerifyMiddleware } from "./middleware/jwt_verify.middleware";
+import { JwtVerificationMiddleware } from "./middleware/jwtVerification.middleware";
 import { ErrorHandlerMiddleware } from "./middleware/errorHandler.middleware";
 import router from "./routes";
 
@@ -34,8 +34,8 @@ class Application {
 
   private initMiddlewares() {
     // Security middleware to validate requests
-    this.app.use(JwtVerifyMiddleware);
-    
+    this.app.use(JwtVerificationMiddleware);
+
     // Error handling middleware
     this.app.use(ErrorHandlerMiddleware);
     this.app.use(bodyParser.json());

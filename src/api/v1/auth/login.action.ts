@@ -1,7 +1,7 @@
 import { RequestHandler, NextFunction, Request, Response } from "express";
 import * as bcryp from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import { sessionTokenSecret, sessionTokenLifeTime } from "../../../config/jwt_session.config";
+import { sessionTokenSecret, sessionTokenLifeTime } from "../../../config/jwt.config";
 import UserRepository from '../../../domain/repositories/user.repository';
 
 export const login: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
