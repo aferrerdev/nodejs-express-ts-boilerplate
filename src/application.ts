@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import MongoDbConnection from "./config/mongodb.config";
 import { JwtVerifyMiddleware } from "./middleware/jwt_verify.middleware";
 import { ErrorHandlerMiddleware } from "./middleware/errorHandler.middleware";
-import AppRoutes from "./appRoutes";
+import router from "./routes";
 
 class Application {
 
@@ -16,9 +16,9 @@ class Application {
 
     this.initDataBaseConnection();
     this.initMiddlewares();
-    const appRoutes = new AppRoutes();
-    appRoutes.install();
-    this.app.use(appRoutes.router);
+
+    // Install application paths routing table
+    this.app.use(router);
   }
 
   public listen() {
@@ -35,6 +35,7 @@ class Application {
   private initMiddlewares() {
     // Security middleware to validate requests
     this.app.use(JwtVerifyMiddleware);
+    
     // Error handling middleware
     this.app.use(ErrorHandlerMiddleware);
     this.app.use(bodyParser.json());
