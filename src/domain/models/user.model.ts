@@ -4,8 +4,9 @@ export default class User implements IUser {
     public email: string;
     public name: string;
     public lastName: string;
-    private password?: string;
-    public token?: string;
+    public token: string;
+
+    private password: string;
 
     public setPassword(password: string) {
         this.password = password;
