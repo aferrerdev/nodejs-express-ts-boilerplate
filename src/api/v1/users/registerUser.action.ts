@@ -12,11 +12,9 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
         const requiredParameters = ["email", "name", "lastName", "password"];
         for (const param of requiredParameters) {
             if (!req.body[param]) {
-                res.status(422).json({ 
-                    status: 422,
+                return res.status(422).json({ 
                     message: `Required parameter ${param} was not present in the request body` 
                 });
-                return;
             }
         }
         
@@ -24,11 +22,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
         const repository = new UserRepository();
         const userExists = await repository.exists(req.body.email);
         if (userExists) {
-            res.status(409).json({ 
-                status: 409,
-                message: "Conflict: An account with this email is already registered." 
-            });
-            return;
+            return res.status(409).json({ message: "Conflict: An account with this email is already registered." });
         }
         // Hash user password
         bcryp.hash(req.body.password, 10, (err, hash) => {
@@ -41,13 +35,10 @@ export const registerUser: RequestHandler = async (req: Request, res: Response, 
                 user.setPassword(hash);
                 user.token = jwt.sign({ email: user.email }, sessionTokenSecret, { expiresIn: sessionTokenLifeTime });
                 repository.create(user);
-                res.status(200).json(user);
+                return res.status(200).json(user);
             }
         });
     } catch (error) {
-        res.status(500).json({ 
-            status: 500,
-            message: "Server error" 
-        }); 
+        return res.status(500).json({ message: "Server error" }); 
     }
 };

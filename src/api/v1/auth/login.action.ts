@@ -11,28 +11,24 @@ import UserRepository from "../../../domain/repositories/user.repository";
 export const login: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     // Check that email is set in the response POST body
     if (!req.body.email) {
-        res.status(422).json({ status: 422, message: "Email field is mandatory." });
-        return;
+        return res.status(422).json({ message: "Email field is mandatory." });
     }
     // Check that password is set in the response POST body
     if (!req.body.password) {
-        res.status(422).json({ status: 422, message: "Password parameter is mandatory." });
-        return;
+        return res.status(422).json({ message: "Password parameter is mandatory." });
     }
     try {
         const repository = new UserRepository();
         // Check if user exists
         const userExists = await repository.exists(req.body.email);
         if (!userExists) {
-            res.status(404).json({ status: 404, message: "User not found" });
-            return;
+            return res.status(404).json({ status: 404, message: "User not found" });
         }
         const user = await repository.view(req.body.email);
         // Hash received password
         const passwordIsValid = bcryp.compareSync(req.body.password, user.getPassword());
         if (!passwordIsValid) {
-            res.status(401).json({ status: 401, message: "Incorrect credentials" });
-            return;
+            return res.status(401).json({ status: 401, message: "Incorrect credentials" });
         }
 
         // Generate authentication token
@@ -41,8 +37,8 @@ export const login: RequestHandler = async (req: Request, res: Response, next: N
         // Update authentication token in database
         user.token = token;
         const loggedUser = await repository.update(user);
-        res.status(200).json(loggedUser); 
+        return res.status(200).json(loggedUser); 
     } catch (error) {
-        res.status(204);
+        return res.status(204);
     }
 };
